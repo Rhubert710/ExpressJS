@@ -26,7 +26,7 @@
 <body>
     <h1>Display Blogs</h1>
     <h2>
-        <a href="http://localhost:4000/blogs/display-blogs">Display Blog</a>
+        <a href="http://localhost:4000/blogs/display-blogs">Display Blogs</a>
         <a href="http://localhost:4000/blogs/display-single-blog">Display Single Blog</a>
         <a href="http://localhost:4000/blogs/post-blog">Post Blog</a>
     </h2>
@@ -34,7 +34,7 @@
     <label for="sortOrder">Blog Sort Order</label>
     <form id="sortForm" action="">
         <select name="sortOrder" id="sortOrder">
-            <option value="asc">Ascending</option>
+            <option value="asce">Ascending</option>
             <option value="desc">Descending</option>
         </select>
     </form>
@@ -42,3 +42,19 @@
 </body>
 
 </html>
+<script>
+    // getBlogs.addEventListener("click", function(){get_blogs(sortOrder.value)});
+
+    // async function get_blogs(order)
+    // {
+    //     console.log(order)
+    //     fetch(`http://localhost:4000/blogs/all?order=${order}`)
+    //     .then(response => response.json())
+    //         .then(blogs=>{
+    //             for (blog of blogs)
+    //             {
+    //                 console.log(blog.author)
+    //             }
+    //         });
+    // }
+</script>

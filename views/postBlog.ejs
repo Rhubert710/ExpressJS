@@ -24,18 +24,27 @@
             var title, text, author, id;
             $("#submit").click(function () {
                 title = $("#title").val();
+                category = $("#category").val();
                 text = $("#text").val();
                 author = $("#author").val();
                 $.post(
-                    "http://localhost:4000/blogs/submit", {
+                    "http://localhost:4000/blogs/submit", 
+                    {
                         title: title,
+                        category: category,
                         text: text,
                         author: author,
+                    },
+                    function(resp)
+                    {
+                        $('#response').html(resp)
                     }
                 );
+                
             });
             $('#update').click(function () {
                 title = $("#title").val();
+                category = $("#category").val();
                 text = $("#text").val();
                 author = $("#author").val();
                 id = $('#id').val();
@@ -43,8 +52,14 @@
                 $.put(
                     "http://localhost:4000/blogs/update-blog/" + id, {
                         title: title,
+                        category: category,
                         text: text,
                         author: author,
+                    },
+                    function(resp)
+                    {
+                        console.log(resp);
+                        $('#response').html(resp);
                     }
                 );
             });
@@ -62,7 +77,9 @@
     <label>Blog Title</label>
     <input id="title" size="40" type="text" />
     <label>Blog Text</label>
-    <input id="text" size="300" type="text" />
+    <input id="text" size="40" type="text" />
+    <label>Blog Category</label>
+    <input id="category" size="300" type="text" />
     <label>Blog Author</label>
     <input id="author" size="40" type="text" />
     <input id="submit" type="button" value="Submit" />
@@ -70,6 +87,8 @@
     <label>Blog Id to Update</label>
     <input id="id" size="40" type="text" />
     <input type="button" id='update' value='Update'>
+
+    <p id="response">k</p>
 </body>
 
 </html>

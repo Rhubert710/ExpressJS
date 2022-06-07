@@ -3,51 +3,7 @@
 
 <head>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            jQuery.each(["put", "delete"], function (i, method) {
-                jQuery[method] = function (url, data, callback, type) {
-                    if (jQuery.isFunction(data)) {
-                        type = type || callback;
-                        callback = data;
-                        data = undefined;
-                    }
 
-                    return jQuery.ajax({
-                        url: url,
-                        type: method,
-                        dataType: type,
-                        data: data,
-                        success: callback
-                    });
-                };
-            });
-            var blogId;
-            $("#getSingleBlog").click(function () {
-                blogId = $("#blogId").val();
-                $.get(
-                    "http://localhost:4000/blogs/single-blog/" + blogId,
-                    function (blog) {
-                        $("#blogTitle").html(blog.title)
-                        $("#blogAuthor").html(blog.author)
-                        $("#blogText").html(blog.text)
-                        
-                    }
-                );
-            });
-            $("#deleteSingleBlog").click(function () {
-                blogId = $("#blogId").val();
-                $.delete(
-                    "http://localhost:4000/blogs/delete-blog/" + blogId,
-                    function (data) {
-                        $("#blogTitle").html('')
-                        $("#blogAuthor").html('')
-                        $("#blogText").html(data)
-                    }
-                );
-            })
-        });
-    </script>
 </head>
 
 <body>
@@ -71,3 +27,52 @@
 </body>
 
 </html>
+<script>
+    $(document).ready(function () {
+        jQuery.each(["put", "delete"], function (i, method) {
+            jQuery[method] = function (url, data, callback, type) {
+                if (jQuery.isFunction(data)) {
+                    type = type || callback;
+                    callback = data;
+                    data = undefined;
+                }
+
+                return jQuery.ajax({
+                    url: url,
+                    type: method,
+                    dataType: type,
+                    data: data,
+                    success: callback
+                });
+            };
+        });
+        var blogId;
+        $("#getSingleBlog").click(function () {
+            blogId = $("#blogId").val();
+            $.getJSON(
+                "http://localhost:4000/blogs/single-blog/" + blogId,
+                function (blogs) {
+                    blogs.forEach((blog) => {
+                    $("#blogTitle").html(blog.title)
+                    $("#blogAuthor").html(blog.author)
+                    
+                    $("#blogText").html(blog.text)
+                    console.log(blog.title)
+                    })
+                    
+                }
+            );
+        });
+        $("#deleteSingleBlog").click(function () {
+            blogId = $("#blogId").val();
+            $.delete(
+                "http://localhost:4000/blogs/delete-blog/" + blogId,
+                function (data) {
+                    $("#blogTitle").html('')
+                    $("#blogAuthor").html('')
+                    $("#blogText").html(data)
+                }
+            );
+        })
+    });
+</script>
